@@ -11,12 +11,11 @@ const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true
 
-}; //User: streann-switcher-user PASS: Stre@nnSwitcherPass
+}; 
 const connectWithRetry = () => {
     console.log('MongoDB connection with retry')
     console.log('process', process.env.MONGODB_URI);
     mongoose.connect(process.env.MONGODB_URI, options).then(() => {
-        // mongoose.connect("mongodb+srv://streann360:Streann360@cluster0.v3pdp.mongodb.net/streann360?retryWrites=true&w=majority", options).then(()=>{
         console.log('MongoDB is connected')
     }).catch(err => {
         console.log(err);
@@ -25,6 +24,9 @@ const connectWithRetry = () => {
     })
 };
 
+
 connectWithRetry();
+
+//mongoose.set('debug', true);
 
 exports.mongoose = mongoose;

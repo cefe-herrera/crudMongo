@@ -3,17 +3,21 @@ const dotenv = require("dotenv");
 dotenv.config();
 const cors = require("cors");
 
-//const mongoose = require("../../common/services/mongoose.service").mongoose;
-const mongoose = require("./common/services/mongoose.service").mongoose;
-
+const PeopleRouter = require('./people/routes.config')
 
 
 const app = express();
+const router = express.Router();
 
 
 const port = process.env.PORT || 3001;
 
-app.get('/', (req, res) => res.send('Hello World!'));
+PeopleRouter.routesConfig(router);
 
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/api', router);
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
